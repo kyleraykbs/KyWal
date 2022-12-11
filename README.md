@@ -15,7 +15,33 @@ https://github.com/reorr/warnai
 Arch Linux
 - pywal-16-colors
 - git
+- python-pip
+- python
+- ffmpeg
+- optipng
+- inkscape
+- qt5-styleplugins (optional) *for making QT apps use the GTK theme*
+
+**install dependencies**
 
 ``
-yay -S pywal-16-colors git
+yay -S pywal-16-colors git python-pip python ffmpeg optipng inkscape qt5-styleplugins
+``
+
+**clone repo to wherever**
+
+``
+git clone https://github.com/kyleraykbs/KyWal
+``
+
+### Optional
+
+- set gtk2 as your qt style in your qt theme setter (qt5ct, etc)
+- install the "Wal Theme" for vscode or run the script then enable it
+*(https://marketplace.visualstudio.com/items?itemName=dlasagno.wal-theme)*
+
+# Running
+
+``
+python path/to/repo/main.py
 ``

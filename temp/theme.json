@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/kyle/projects/kywal/temp/staticwallpaper.png",
+    "alpha": "100",
+    "special": {
+        "background": "#00090a",
+        "foreground": "#feffff",
+        "cursor": "#feffff"
+    },
+    "colors": {
+        "color0": "#00090a",
+        "color1": "#006ac6",
+        "color2": "#008485",
+        "color3": "#00893f",
+        "color4": "#466e8f",
+        "color5": "#006cc0",
+        "color6": "#25809e",
+        "color7": "#c4d8da",
+        "color8": "#223335",
+        "color9": "#4490f8",
+        "color10": "#00bebf",
+        "color11": "#65dd86",
+        "color12": "#6d94b7",
+        "color13": "#3d92f3",
+        "color14": "#73c2e3",
+        "color15": "#feffff"
+    }
+}

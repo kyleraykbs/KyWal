@@ -1,0 +1,7 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": false,
+    "python.linting.pylamaEnabled": false,
+    "python.linting.banditEnabled": false,
+    "python.linting.prospectorEnabled": true
+}

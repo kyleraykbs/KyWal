@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/kyle/wallpaper/bridgesunsetpastel.png",
+    "alpha": "100",
+    "special": {
+        "background": "#050608",
+        "foreground": "#c0c0c1",
+        "cursor": "#c0c0c1"
+    },
+    "colors": {
+        "color0": "#050608",
+        "color1": "#EC9076",
+        "color2": "#39738B",
+        "color3": "#547889",
+        "color4": "#A07B83",
+        "color5": "#598494",
+        "color6": "#A58D8B",
+        "color7": "#c0c0c1",
+        "color8": "#434445",
+        "color9": "#EC9076",
+        "color10": "#39738B",
+        "color11": "#547889",
+        "color12": "#A07B83",
+        "color13": "#598494",
+        "color14": "#A58D8B",
+        "color15": "#c0c0c1"
+    }
+}
