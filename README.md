@@ -1,10 +1,23 @@
 # KyWal : ``>UNIVERSAL<  system themer using Python and PyWal``
 
+# NOT FINISHED YET
+
+### Missing Features (will be added within the next week)
+- wallpaper
+- window manager theme
+- rofi theme
+- discord theme
+- pywalfox autoinstall
+- gif wallpapers
+- razer keyboard theme
+- steam theme (possibly)
+
 ## Description
 
-To sum it up, this is a mess of utilites stringed together in combination with some scripts I whipped up in python
-so you can theme your whole systems color pallette to match your wallpaper with one command and a few seconds of wait time
-from what ive seen this is the best one command utility for theming your entire system with your wallpaper
+To sum it up, this is a mess of utilites stringed together in combination with some scripts I whipped up in python.
+
+Basically you can theme your whole systems color pallette/themes to match your wallpaper with one command and a few seconds of wait time
+from what ive seen this is the best one command utility for theming your entire system with your wallpaper unfortunatly...
 
 ### Used Repositories:
 https://github.com/reorr/warnai
@@ -45,3 +58,7 @@ git clone https://github.com/kyleraykbs/KyWal
 ``
 python path/to/repo/main.py
 ``
+
+### Post First Run Setup
+
+- open your gtk theme changer *(lxappearance, etc)* of choice and set your primary theme to warnai
