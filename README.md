@@ -17,7 +17,6 @@
 To sum it up, this is a mess of utilites stringed together in combination with some scripts I whipped up in python.
 
 Basically you can theme your whole systems color pallette/themes to match your wallpaper with one command and a few seconds of wait time
-from what ive seen this is the best one command utility for theming your entire system with your wallpaper unfortunatly...
 
 ### Used Repositories:
 https://github.com/reorr/warnai
