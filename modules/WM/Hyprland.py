@@ -6,6 +6,12 @@ import subprocess
 from customcolors import *
 import globalvars
 
+f = open(globalvars.userdir + "/.cache/wal/colors")
+colorsraw = f.readlines()
+colors = []
+for clr in colorsraw:
+    colors.append(clr.strip())
+
 def NotSupportedWallpaperMGR():
     print(fg.blue + "WARN: it appears you arent using a supported wallpaper setter")
     print("or it isn't currently running. Currently the only supported wallpaper setters are")
@@ -43,12 +49,20 @@ if " swww" in runningapps:
         f = open(configpath, "r")
         lines = f.readlines()
         f.close()
-
+        
+        newlines = []
+        for line in lines:
+                if line.strip().startswith("col.active_border"):
+                        line = line.split("=")
+                        line[1] = "rgba(" + colors[1].replace("#", "") + "ff) rgba(" + colors[2].replace("#", "") + "ff) 45deg"
+                        line = "= ".join(line) + "\n"
+                newlines.append(line)
+        
         if runcommand not in data:
-            lines.append('\nexec=' + runcommand + "\n")
+            newlines.append('\nexec=' + runcommand + "\n")
 
         f = open(configpath, "w")
-        f.writelines(lines)
+        f.writelines(newlines)
         f.close()
     else:
         print(fg.red + "ERROR: Config path does not exist: " + configpath + fg.reset)
