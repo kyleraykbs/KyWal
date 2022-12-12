@@ -12,6 +12,9 @@ if not install.checkForDependancies():
     print(fg.reset + globalvars.githublink)
     exit()
 
+def YNPrompt():
+    return (input(fg.lightgreen + "(Y/n): " + fg.reset) != "n")
+
 def xiwaltopywal(): # this whole function is some code from a previous itteration that i didnt put much effort into probably could use a rework
     output = subprocess.check_output([globalvars.xiwalpath, '-i', globalvars.staticwallpaperpath]).decode('utf-8')
     colors = output.split("#")
@@ -90,7 +93,7 @@ def vscode():
     if os.path.isfile(globalvars.vscodepath):
         os.system(globalvars.vscodepath + ' --install-extension dlasagno.wal-theme')
 
-def bash():
+def bash(noprompt = False):
     if os.path.isfile(globalvars.userdir + "/.bashrc"):
         f = open(globalvars.userdir + "/.bashrc", "r")
         data = f.read()
@@ -101,10 +104,11 @@ def bash():
         f.close()
         
         if "wal " not in data:
-            print(fg.red + "WARN: You do not have wal in your .bashrc")
-            print("this will make any new terminals automatically get themed")
-            print("would you like to put a short wal command in your .bashrc?")
-            if input(fg.green + "(Y/n): " + fg.reset).lower() != "n":
+            if not noprompt:
+                print(fg.red + "WARN: You do not have wal in your .bashrc")
+                print("this will make any new terminals automatically get themed")
+                print("would you like to put a short wal command in your .bashrc?")
+            if noprompt or (input(fg.green + "(Y/n): " + fg.reset).lower() != "n"):
                 lines.reverse()
                 lines.append("wal -net --theme " + globalvars.themepath + ".json > /dev/null\n")
                 lines.reverse()
@@ -112,11 +116,82 @@ def bash():
                 f = open(globalvars.userdir + "/.bashrc", "w")
                 f.writelines(lines)
                 f.close()
+            print("added: 'wal -net --theme " + globalvars.themepath + ".json > /dev/null\n' to the top of .bashrc")
 
-        
+################
+supportedenvs = {
+    "Hyprland":globalvars.Hyprlanddir
+}
+################
 
+def themeuserenv(): ### Detect the current WM / DE and see if we support it
+    curenv = subprocess.getoutput('echo $XDG_CURRENT_DESKTOP').strip()
+    print(curenv)
+    if curenv in supportedenvs:
+        if not os.path.isfile(globalvars.autothemedewm):
+            print(fg.green + "It appears your DE/WM (" + curenv + ") is supported!")
+            print("would you like to change its config automatically from now on?")
+            if YNPrompt():
+                f = open(globalvars.autothemedewm, "w")
+                f.write("y")
+                f.close()
+            else:
+                f = open(globalvars.autothemedewm, "w")
+                f.write("n")
+                f.close()
+
+        f = open(globalvars.autothemedewm, "r")
+        shouldthemedewm = f.read().strip() == "y"
+        f.close()
+
+        if shouldthemedewm:
+            envscript = supportedenvs[curenv]
+            os.system("export PYTHONPATH='" + globalvars.projectdir + "'; python '" + envscript + "'")
+
+def firstTimeSetup():
+    if os.path.exists(globalvars.autothemedewm):
+        os.remove(globalvars.autothemedewm)
+    print("")
+    print(bg.cyan + "First Time Setup" + bg.reset)
+    print(bg.cyan + "It appears this is the first time you have run KyWal!")
+    print(bg.cyan + "Welcome, would you like to automatically setup some themes?")
+    print(bg.cyan + "(Dont worry there will be a (Y/n) prompt for each step)" + bg.reset)
+    if input(fg.lightgreen + "(Y/n): " + fg.reset) != "n":
+        print("")
+        print("Would you like to make your terminal automatically get themed after opening?")
+        print("aka do you want: wal -net --theme " + globalvars.themepath + ".json > /dev/null\n")
+        print("put at the top of your .bashrc? (it should run instantly)")
+        print("((if its already there nothing will be added))")
+        if YNPrompt():
+            bash(True)
+        print("")
+        print("Would you like to install the Wal VSCode theme?")
+        print("you will have to manually enable it in vscode extensions")
+        if YNPrompt():
+            vscode()
+    print("")
+
+    # Create the first time setup file so we dont run again
+    f = open(globalvars.firsttimesetup, "w")
+    f.close()
+
+    print(fg.green + "First time setup complete!" + fg.reset)
+    input("(press enter to continue)")
+
+def printHelp():
+    print("--help : print help")
+    print("--first-time-setup : re-run first time setup")
 
 if __name__ == "__main__":
+    if "--first-time-setup" in sys.argv:
+        sys.argv.remove('--first-time-setup')
+        if os.path.exists(globalvars.firsttimesetup):
+            os.remove(globalvars.firsttimesetup)
+    
+    if ("--help" in sys.argv) or ("-h" in sys.argv):
+        printHelp()
+        exit()
+
     if len(sys.argv) <= 1:
         print(fg.red + "You must enter a wallpaper and a backend!")
         exit()
@@ -136,9 +211,19 @@ if __name__ == "__main__":
         subprocess.check_output([globalvars.ffmpegpath, '-i', wallpaper, '-vframes', '1', globalvars.staticwallpaperpath])
         subprocess.check_output(['cp', wallpaper, globalvars.gifwallpaperpath])
     else:
-        subprocess.check_output(['cp', wallpaper, globalvars.staticwallpaperpath])
+        if wallpaper.endswith(".png"):
+            subprocess.check_output(['cp', wallpaper, globalvars.staticwallpaperpath])
+        else:
+            print("converting file to png please wait")
+            subprocess.check_output(['convert', wallpaper, globalvars.staticwallpaperpath])
+            print("done converting")
 
     wal()
-    bash()
-    vscode()
+
+    ### IF we are on first time setup
+    if not os.path.isfile(globalvars.firsttimesetup):
+        firstTimeSetup()
+    ###
+
+    themeuserenv()
     warnai()

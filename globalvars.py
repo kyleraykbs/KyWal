@@ -5,14 +5,24 @@ import os
 userdir = os.path.expanduser('~')
 projectdir = os.path.abspath(os.path.dirname(__file__))
 tempdir = projectdir + "/temp"
+modulesdir = projectdir + "/modules"
 
 ########
+
+#### external modules
+
+extmodulesdir = modulesdir + "/external"
+swwwextmoddir = extmodulesdir + "/swww.py"
+
+#####################
 
 ## files
 
 themepath = tempdir + "/theme"
 staticwallpaperpath = tempdir + "/staticwallpaper.png"
 gifwallpaperpath = tempdir + "/gifwallpaper.gif"
+firsttimesetup = tempdir + "/FirstTimeSetup"
+autothemedewm = tempdir + "/ThemeDEWM"
 
 ########
 
@@ -23,6 +33,12 @@ warnailink = "https://github.com/reorr/warnai"
 
 ########
 
+# modules
+
+Hyprlanddir = modulesdir + "/WM/Hyprland.py"
+
+#########
+
 ##### program paths
 
 thirdparty = "thirdparty"
@@ -31,6 +47,7 @@ warani = thirdpartyfull + "/warnai"
 
 waranipath = warani + "/warnai"
 vscodepath = '/bin/code'
+bashpath = '/bin/bash'
 walpath = '/bin/wal'
 gitpath = '/bin/git'
 pippath = '/bin/pip3'

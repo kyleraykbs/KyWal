@@ -18,6 +18,7 @@ class fg:
 
 class bg:
  black = '\033[40m'
+ reset = '\033[40m'
  red = '\033[41m'
  green = '\033[42m'
  orange = '\033[43m'
