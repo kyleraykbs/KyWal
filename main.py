@@ -90,6 +90,10 @@ def warnai():
         os.makedirs(globalvars.userdir + '/.themes')
     os.system(globalvars.waranipath + ' -w -g fantome -xf pastel')
 
+def pywalfox():
+    if os.path.exists(globalvars.userdir + "/.local/bin/pywalfox"):
+        os.system(globalvars.userdir + "/.local/bin/pywalfox update")
+
 def rofi():
     os.system("python '" + globalvars.rofiapp + "'")
 
@@ -236,5 +240,6 @@ if __name__ == "__main__":
 
     themeuserenv()
     rofi()
+    pywalfox()
     oomox()
     warnai()
