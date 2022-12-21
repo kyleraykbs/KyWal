@@ -64,5 +64,7 @@ gitpath = '/bin/git'
 pippath = '/bin/pip3'
 ffmpegpath = '/bin/ffmpeg'
 xiwalpath = userdir + '/.local/bin/xiwal'
+steamrootpath = userdir + '/.steam/root'
+walsteampath = userdir + "/.local/bin/wal-steam"
 
 ###################

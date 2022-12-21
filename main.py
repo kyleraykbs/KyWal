@@ -104,6 +104,15 @@ def vscode():
     if os.path.isfile(globalvars.vscodepath):
         os.system(globalvars.vscodepath + ' --install-extension dlasagno.wal-theme')
 
+def steam():
+    print("Steam")
+    if os.path.isdir(globalvars.steamrootpath):
+        if os.path.isfile(globalvars.walsteampath):
+            if not os.path.isdir(globalvars.steamrootpath + "/skins"):
+                os.mkdir(globalvars.steamrootpath + "/skins")
+            os.system(globalvars.walsteampath)
+        
+
 def bash(noprompt = False):
     if os.path.isfile(globalvars.userdir + "/.bashrc"):
         f = open(globalvars.userdir + "/.bashrc", "r")
@@ -241,5 +250,6 @@ if __name__ == "__main__":
     themeuserenv()
     rofi()
     pywalfox()
+    steam()
     oomox()
     warnai()
