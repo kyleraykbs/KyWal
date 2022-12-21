@@ -1,0 +1,8 @@
+* {
+    background:     CLR1;
+    background-alt: CLR2;
+    foreground:     CLR3;
+    selected:       CLR4;
+    active:         CLR5;
+    urgent:         CLR6;
+}

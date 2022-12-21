@@ -9,10 +9,21 @@ modulesdir = projectdir + "/modules"
 
 ########
 
+#### APPS
+
+appsdir = modulesdir + "/APPS"
+
+rofidir = appsdir + "/rofi"
+rofiapp = rofidir + "/rofi.py"
+
+#########
+
 #### external modules
 
 extmodulesdir = modulesdir + "/external"
+
 swwwextmoddir = extmodulesdir + "/swww.py"
+oomoxextmoddir = extmodulesdir + "/oomox.py"
 
 #####################
 

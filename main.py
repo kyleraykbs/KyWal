@@ -1,7 +1,8 @@
+import os
+origdir = os.getcwd()
 import install
 import globalvars
 import sys
-import os
 import subprocess
 from customcolors import *
 
@@ -89,6 +90,12 @@ def warnai():
         os.makedirs(globalvars.userdir + '/.themes')
     os.system(globalvars.waranipath + ' -w -g fantome -xf pastel')
 
+def rofi():
+    os.system("python '" + globalvars.rofiapp + "'")
+
+def oomox():
+    os.system("python '" + globalvars.oomoxextmoddir + "'")
+
 def vscode():
     if os.path.isfile(globalvars.vscodepath):
         os.system(globalvars.vscodepath + ' --install-extension dlasagno.wal-theme')
@@ -110,13 +117,13 @@ def bash(noprompt = False):
                 print("would you like to put a short wal command in your .bashrc?")
             if noprompt or (input(fg.green + "(Y/n): " + fg.reset).lower() != "n"):
                 lines.reverse()
-                lines.append("wal -net --theme " + globalvars.themepath + ".json > /dev/null\n")
+                lines.append("wal -net --theme " + globalvars.themepath + ".json > /dev/null &\n")
                 lines.reverse()
 
                 f = open(globalvars.userdir + "/.bashrc", "w")
                 f.writelines(lines)
                 f.close()
-            print("added: 'wal -net --theme " + globalvars.themepath + ".json > /dev/null\n' to the top of .bashrc")
+            print("added: 'wal -net --theme " + globalvars.themepath + ".json > /dev/null &\n' to the top of .bashrc")
 
 ################
 supportedenvs = {
@@ -159,7 +166,7 @@ def firstTimeSetup():
     if input(fg.lightgreen + "(Y/n): " + fg.reset) != "n":
         print("")
         print("Would you like to make your terminal automatically get themed after opening?")
-        print("aka do you want: wal -net --theme " + globalvars.themepath + ".json > /dev/null\n")
+        print("aka do you want: wal -net --theme " + globalvars.themepath + ".json > /dev/null &\n")
         print("put at the top of your .bashrc? (it should run instantly)")
         print("((if its already there nothing will be added))")
         if YNPrompt():
@@ -196,11 +203,13 @@ if __name__ == "__main__":
         print(fg.red + "You must enter a wallpaper and a backend!")
         exit()
     elif len(sys.argv) <= 2:
-        wallpaper = sys.argv[1]
+        wallpaper = origdir + "/" + sys.argv[1]
         backend = 'xiwal'
     elif len(sys.argv) <= 3:
-        wallpaper = sys.argv[1]
+        wallpaper = origdir + "/" + sys.argv[1]
         backend = sys.argv[2]
+
+    print(wallpaper)
 
     ##### setup wallpaper into temp folder
     if os.path.isfile(globalvars.staticwallpaperpath):
@@ -226,4 +235,6 @@ if __name__ == "__main__":
     ###
 
     themeuserenv()
+    rofi()
+    oomox()
     warnai()

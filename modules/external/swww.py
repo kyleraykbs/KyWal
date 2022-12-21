@@ -1,5 +1,8 @@
 import os
 import sys
+import time
+
+time.sleep(1) # give wm time to start
 
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
@@ -12,6 +15,7 @@ import globalvars
 
 print("if this errors out dont worry:")
 os.system("swww init")
+time.sleep(1) # give swww time to init
 print("============")
 print("if anything errors out after now then DO worry")
 if os.path.isfile(globalvars.gifwallpaperpath):
