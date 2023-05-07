@@ -25,6 +25,8 @@ extmodulesdir = modulesdir + "/external"
 swwwextmoddir = extmodulesdir + "/swww.py"
 oomoxextmoddir = extmodulesdir + "/oomox.py"
 
+razercliextmoddir = extmodulesdir + "/razercli.py"
+
 #####################
 
 ## files
@@ -66,5 +68,7 @@ ffmpegpath = '/bin/ffmpeg'
 xiwalpath = userdir + '/.local/bin/xiwal'
 steamrootpath = userdir + '/.steam/root'
 walsteampath = userdir + "/.local/bin/wal-steam"
+
+razercli = userdir + "/.local/bin/razer-cli"
 
 ###################

@@ -100,6 +100,11 @@ def rofi():
 def oomox():
     os.system("python '" + globalvars.oomoxextmoddir + "'")
 
+def razercli():
+    if os.path.isfile(globalvars.razercli):
+        os.system("python '" + globalvars.razercliextmoddir + "'")
+        
+
 def vscode():
     if os.path.isfile(globalvars.vscodepath):
         os.system(globalvars.vscodepath + ' --install-extension dlasagno.wal-theme')
@@ -212,15 +217,18 @@ if __name__ == "__main__":
         printHelp()
         exit()
 
+    wallpaper = ""
+    os.chdir(origdir)
     if len(sys.argv) <= 1:
         print(fg.red + "You must enter a wallpaper and a backend!")
         exit()
     elif len(sys.argv) <= 2:
-        wallpaper = origdir + "/" + sys.argv[1]
+        wallpaper = os.path.abspath(sys.argv[1])
         backend = 'xiwal'
     elif len(sys.argv) <= 3:
-        wallpaper = origdir + "/" + sys.argv[1]
+        wallpaper = os.path.abspath(sys.argv[1])
         backend = sys.argv[2]
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
 
     print(wallpaper)
 
@@ -250,6 +258,7 @@ if __name__ == "__main__":
     themeuserenv()
     rofi()
     pywalfox()
-    steam()
-    oomox()
+    razercli()
     warnai()
+    oomox()
+    steam()

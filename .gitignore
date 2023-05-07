@@ -1,3 +1,4 @@
 temp/
 thirdparty/
 modules/APPS/rofi/pywal.rasi
+*.pyc
