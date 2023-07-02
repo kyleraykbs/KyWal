@@ -76,7 +76,6 @@ def xiwaltopywal(): # this whole function is some code from a previous itteratio
     f.close()
 
 def wal():
-    subprocess.check_output([globalvars.walpath, '-nei', globalvars.staticwallpaperpath, '--backend', backend, '-p', globalvars.themepath])
     # n: Skip setting the wallpaper.
     # e: Skip reloading gtk/xrdb/i3/sway/polybar
     # i: Image path
@@ -84,7 +83,8 @@ def wal():
     if backend == 'xiwal':
         xiwaltopywal()
         subprocess.check_output([globalvars.walpath, '-ne', '--theme', globalvars.themepath + '.json'])
-
+    else:
+        subprocess.check_output([globalvars.walpath, '-nei', globalvars.staticwallpaperpath, '--backend', backend, '--theme', globalvars.themepath])
 def warnai():
     if not os.path.isdir(globalvars.userdir + '/.themes'):
         os.makedirs(globalvars.userdir + '/.themes')
